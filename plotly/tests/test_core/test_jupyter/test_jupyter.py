@@ -12,8 +12,6 @@ from unittest import TestCase
 from os import path
 import subprocess
 
-import plotly
-
 PATH_ROOT = path.dirname(__file__)
 PATH_FIXTURES = path.join(PATH_ROOT, 'fixtures')
 PATH_TEST_NB = path.join(PATH_FIXTURES, 'test.ipynb')
