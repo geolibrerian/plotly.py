@@ -41,4 +41,12 @@ for version in ${PLOTLY_PYTHON_VERSIONS[@]}; do
     # install some test tools
     pip install nose coverage ||
         error_exit "${SIG} ${LINENO}: can't install test tools for Python ${version}."
+
+    # install jupyter
+    pip install jupyter ||
+        error_exit "${SIG} ${LINENO}: can't install jupyter  for Python ${version}."
+
+    # install jupyter test JS requirements
+    cd ${PLOTLY_JUPYTER_TEST_DIR} && npm i ||
+        error_exit "${SIG} ${LINENO}: can't install jupyter test JS requirements."
 done
