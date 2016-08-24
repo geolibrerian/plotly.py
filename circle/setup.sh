@@ -40,6 +40,7 @@ for version in ${PLOTLY_PYTHON_VERSIONS[@]}; do
         error_exit "${SIG} ${LINENO}: can't install optional for Python ${version}."
 
     # try
-    jupyter kernelspec install
+    pip install ipykernel -I
+    python -m ipykernel install --user
     jupyter kernelspec list
 done
