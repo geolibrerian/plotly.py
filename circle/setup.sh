@@ -41,8 +41,4 @@ for version in ${PLOTLY_PYTHON_VERSIONS[@]}; do
 
     # try
     jupyter kernelspec list
-
-    # install jupyter test JS requirements
-    cd ${PLOTLY_JUPYTER_TEST_DIR} && npm i ||
-        error_exit "${SIG} ${LINENO}: can't install jupyter test JS requirements."
 done

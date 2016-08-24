@@ -4,7 +4,7 @@ machine:
 
     PLOTLY_PACKAGE_ROOT: /home/ubuntu/${CIRCLE_PROJECT_REPONAME}
     PLOTLY_CONFIG_DIR: ${HOME}/.plotly
-    PLOTLY_PYTHON_VERSIONS: 3.3.3 3.4.1
+    PLOTLY_PYTHON_VERSIONS: 2.7.8 3.3.3 3.4.1
     PLOTLY_CORE_REQUIREMENTS_FILE: ${PLOTLY_PACKAGE_ROOT}/requirements.txt
     PLOTLY_OPTIONAL_REQUIREMENTS_FILE: ${PLOTLY_PACKAGE_ROOT}/optional-requirements.txt
     PLOTLY_JUPYTER_TEST_DIR: ${PLOTLY_PACKAGE_ROOT}/plotly/tests/test_core/test_jupyter
@@ -26,6 +26,10 @@ dependencies:
     # we need to cd out of the project root to ensure the install worked
     - cd ~ && python -c "import plotly"
 
+    # install jupyter test JS requirements
+    - cd ${PLOTLY_JUPYTER_TEST_DIR} && npm i
+
+
   cache_directories:
 
     - "~/.pyenv/versions"  # attempt to just cache installed pyenv things
@@ -45,6 +49,7 @@ test:
     - sudo chmod -R 777 ${PLOTLY_CONFIG_DIR} && python -c "import plotly"
 
     # test core things in the general 2.7 version that circle has
+    - ls ${PLOTLY_JUPYTER_TEST_DIR}/node_modules/
     - nosetests -x plotly/tests/test_core --with-coverage --cover-package=plotly
     - mkdir "${CIRCLE_ARTIFACTS}/2.7" || true
     - coverage html -d "${CIRCLE_ARTIFACTS}/2.7" --title=2.7
