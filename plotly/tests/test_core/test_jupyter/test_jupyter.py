@@ -23,7 +23,7 @@ class PlotlyJupyterTestCase(TestCase):
         with open(PATH_TEST_NB, 'r') as f:
             self.nb = nbformat.read(f, as_version=4)
 
-        self.ep = ExecutePreprocessor(timeout=600)
+        self.ep = ExecutePreprocessor(timeout=600, kernel_name='python2')
         self.html_exporter = HTMLExporter()
 
         self.ep.preprocess(self.nb, {'metadata': {'path': '.'}})

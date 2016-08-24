@@ -35,16 +35,12 @@ for version in ${PLOTLY_PYTHON_VERSIONS[@]}; do
     pip install -r ${PLOTLY_CORE_REQUIREMENTS_FILE} ||
         error_exit "${SIG} ${LINENO}: can't install core reqs for Python ${version}."
 
+    # install optional (including test) requirements
     pip install -r ${PLOTLY_OPTIONAL_REQUIREMENTS_FILE} ||
         error_exit "${SIG} ${LINENO}: can't install optional for Python ${version}."
 
-    # install some test tools
-    pip install nose coverage ||
-        error_exit "${SIG} ${LINENO}: can't install test tools for Python ${version}."
-
-    # install jupyter
-    pip install jupyter ||
-        error_exit "${SIG} ${LINENO}: can't install jupyter  for Python ${version}."
+    # try
+    jupyter kernelspec list
 
     # install jupyter test JS requirements
     cd ${PLOTLY_JUPYTER_TEST_DIR} && npm i ||
