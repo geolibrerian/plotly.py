@@ -40,5 +40,6 @@ for version in ${PLOTLY_PYTHON_VERSIONS[@]}; do
         error_exit "${SIG} ${LINENO}: can't install optional for Python ${version}."
 
     # try
+    jupyter kernelspec install
     jupyter kernelspec list
 done
