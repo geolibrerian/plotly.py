@@ -41,6 +41,6 @@ for version in ${PLOTLY_PYTHON_VERSIONS[@]}; do
 
     # try
     pip install ipykernel -I
-    python -m ipykernel install --user
+    python -m ipykernel install --user --name ${version}
     jupyter kernelspec list
 done
